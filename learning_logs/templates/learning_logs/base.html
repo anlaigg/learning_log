@@ -1,0 +1,61 @@
+{% load bootstrap4 %}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,
+	shrink-to-fit=no">
+	<title>Learning Log</title>
+	{% bootstrap_css %}
+	{% bootstrap_javascript jquery='full' %}
+
+</head>
+
+<body background="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg-baofun.zhhainiao.com%2Ffs%2F2070cb6a2714d248875725c6d798160b.jpg&refer=http%3A%2F%2Fimg-baofun.zhhainiao.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1675337479&t=8d1d9c1c1e9c743270d1f7e45a13114c" style="opacity: 0.8;">
+	
+	<nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border">
+		<a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+		<!-- 将在浏览器窗口太窄 无法水平显示整个导航栏时显示 -->
+		<button class="navbar-toggler" type="button" data-toggle="collaspse"
+			data-target="#navbarCollapse" aria-cotrols="navbarCollapse"
+			aria-expanded="false" aria-lable="Toggle navigation">
+			<span class="navbar-toggler-icon"></span></button>
+		<div class="collaspse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'learning_logs:topics' %}">
+						Topic</a></li>
+			</ul>
+			<ul class="navbar-nav mr-auto">
+				{% if user.is_authenticated %}
+					<li class="nav-item">
+						<span class="navbar-text">Hello,{{ user.username }}.</span>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users:logout' %}">Log out</a>
+					</li>
+				{% else %}
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users:register' %}">Register</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'users:login' %}">Log in</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
+	<main role="main" class="container" style="background:white; padding: 10px 20px;">
+		<div class="pb-2 mb-2 border-bottom">
+			{% block page_header %}{% endblock page_header %}
+		</div>
+		<div>
+			{% block content %}{% endblock content %}
+		</div>
+	</main>
+</body>
+
+
+
+
